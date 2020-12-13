@@ -48,17 +48,10 @@ class Migration(migrations.Migration):
             fields=[
                 ('id', models.AutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
                 ('m_id', models.CharField(max_length=30, unique=True)),
-<<<<<<< HEAD
                 ('mname', models.CharField(max_length=30)),
                 ('quantity', models.IntegerField()),
                 ('m_type', models.CharField(max_length=30)),
                 ('price', models.IntegerField(max_length=30)),
-=======
-                ('quantity', models.IntegerField()),
-                ('m_type', models.CharField(max_length=30)),
-                ('price', models.IntegerField(max_length=30)),
-                ('stock', models.IntegerField()),
->>>>>>> c1c5b68294d4cec29ff07a443a995e37bddb4ef1
             ],
         ),
         migrations.CreateModel(
