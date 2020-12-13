@@ -1,0 +1,208 @@
+
+{% extends 'src/base.html' %}
+{% load static %}
+
+    {% block content %}
+<head>
+    <title>Medicine Details</title>
+    
+</head>
+
+<body>
+<nav class="navbar navbar-inverse navbar-fixed-top">
+    <div class="container-fluid">
+        <div class="navbar-header">
+            <a href="/src/" class="navbar-brand"><span
+                    class="glyphicon glyphicon glyphicon-home"></span>&nbsp;HOME</a>
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#thisnav">
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+        </div>
+        <div class="collapse navbar-collapse" id="thisnav">
+            <ul class="nav navbar-nav"></ul>
+                <li class="dropdown"><a href="#" class="dropdown-toggle" data-toggle="dropdown">Medicine Management<b
+                        class="caret"></b></a>
+                    <ul id="med-menu" class="dropdown-menu inverse-dropdown">
+                        <li><a href="/src/medform/">Add Medicine Details</a></li>
+                        <li><a href="/src/medtable/">View Medicine Details</a></li>
+                    </ul>
+                </li>
+                <div class="collapse navbar-collapse" id="thisnav">
+                    <ul class="nav navbar-nav">
+                        <li class="dropdown"><a href="#" class="dropdown-toggle" data-toggle="dropdown">Customer Management<b
+                                class="caret"></b></a>
+                            <ul id="cust-menu" class="dropdown-menu inverse-dropdown">
+                                <li><a href="/src/custform/">Add Customer Details</a></li>
+                                <li><a href="/src/custtable/">View Customer Details</a></li>
+                            </ul>
+                        </li>
+                        
+                    </ul>
+                </div>
+               
+            </ul>
+        </div>
+    </div>
+</nav>
+
+<div class="container">
+    <div class="col-md-2"></div>
+    <div class="panel panel-default col-md-8 jumcust2">
+        <div class="panel-heading">
+            <h1 class="padtop5">
+                {% if add %}
+                    Add Medicine Details
+                {% else %}
+                    Update Medicine Details
+                {% endif %}</h1>
+        </div>
+        <div class="panel-body">
+            {% if med %}
+                <form action="/src/medformupdate{{ med.m_id }}/" method="post">
+                    {% csrf_token %}
+                    <div class="row">
+                        <div class="col-md-3 padtop5">
+                            <label for="m_id" class="form-control-label">Medicine Code:</label>
+                        </div>
+                        <div class="col-md-2">
+                            <input type="text" class="form-control" id="m_id" placeholder="Code" name="m_id"
+                                   value="{{ med.m_id }}"/>
+                        </div>
+                    </div>
+                    <div class="row padtop15">
+                        <div class="col-md-3 padtop5">
+                            <label for="mname" class="form-control-label">Medicine Name:</label>
+                        </div>
+                        <div class="form-group col-md-4">
+                            <input type="text" name="mname" class="form-control" id="mname" placeholder="Medicine Name"
+                                   value="{{ med.mname }}" required/>
+                        </div>
+                    </div>
+                    <div class="row padtop5">
+                        <div class="col-md-3 padtop5">
+                            <label for="quantity" class="form-control-label">Quantity :</label>
+                        </div>
+                        <div class="form-group col-md-8">
+                            <input type="text" name="quantity" class="form-control" id="dname" placeholder="Quantity"
+                                   value="{{ med.quantity }}"/>
+                        </div>
+                    </div>
+                    <div class="row padtop5">
+                        <div class="col-md-3">
+                            <label for="price" class="form-control-label padtop5">Price:</label>
+                        </div>
+                        <div class="col-md-2">
+                            <input type="text" name="price" class="form-control" id="price" placeholder="Price"
+                                   value="{{ med.price }}" required/>
+                        </div>
+                    </div>
+                    <div class="row padtop15">
+                        <div class="col-md-3">
+                            <label for="type" class="form-control-label padtop5">Type:</label>
+                        </div>
+                        <div class="col-md-2">
+                            <input type="text" name="type" class="form-control" id="stock" placeholder="type"
+                                   value="{{ med.m_type }}"/>
+                        </div>
+                    </div>
+                    <div class="row" id="buttoncustom">
+                        <div class="col-md-3"></div>
+                        <div class="col-md-2 padtop15">
+                            <button type="submit" class="btn btn-default"><a href="/src/">Cancel</a></button>
+                        </div>
+                        {% if request.user.is_superuser %}
+                        <div class="col-md-2 padtop15">
+                            <button type="submit" class="btn btn-primary">
+                                {% if add %}
+                                    Add Record
+                                {% else %}
+                                    Update Record
+                                {% endif %}</button>
+                        </div>
+                        <div class="col-md-offset-8 padtop15">
+                            <button type="submit" class="delbut btn btn-danger"><a
+                                    href="/src/medformdelete{{ med.m_id }}/">Delete Record</a></button>
+                        </div>
+                        {% else %}
+                        <h3>BECOME SUPERUSER TO EDIT</h3>
+                        {% endif %}
+                        
+                    </div>
+                </form>
+            {% else %}
+                <form action="/src/medforminsert/" method="post">
+                    {% csrf_token %}
+                    <div class="row">
+                        <div class="col-md-3 padtop5">
+                            <label for="m_id" class="form-control-label">Medicine Code:</label>
+                        </div>
+                        <div class="col-md-2">
+                            <input type="text" class="form-control" id="m_id" placeholder="Code" name="m_id"
+                                   value="{{ med.m_id }}"/>
+                        </div>
+                    </div>
+                    <div class="row padtop15">
+                        <div class="col-md-3 padtop5">
+                            <label for="mname" class="form-control-label">Medicine Name:</label>
+                        </div>
+                        <div class="form-group col-md-4">
+                            <input type="text" name="mname" class="form-control" id="mname" placeholder="Medicine Name"
+                                   value="{{ med.mname }}" required/>
+                        </div>
+                    </div>
+                    <div class="row padtop5">
+                        <div class="col-md-3 padtop5">
+                            <label for="quantity" class="form-control-label">Quantity :</label>
+                        </div>
+                        <div class="form-group col-md-8">
+                            <input type="text" name="quantity" class="form-control" id="quantity" placeholder="Quantity"
+                                   value="{{ med.quantity }}"/>
+                        </div>
+                    </div>
+                    <div class="row padtop5">
+                        <div class="col-md-3">
+                            <label for="price" class="form-control-label padtop5">Price:</label>
+                        </div>
+                        <div class="col-md-2">
+                            <input type="text" name="price" class="form-control" id="price" placeholder="Price"
+                                   value="{{ med.price }}" required/>
+                        </div>
+                    </div>
+                    <div class="row padtop15">
+                        <div class="col-md-3">
+                            <label for="type" class="form-control-label padtop5">Type:</label>
+                        </div>
+                        <div class="col-md-2">
+                            <input type="text" name="type" class="form-control" id="stock" placeholder="type"
+                                   value="{{ med.m_type }}"/>
+                        </div>
+                    </div>
+                    <div class="row" id="buttoncustom">
+                        <div class="col-md-3"></div>
+                        <div class="col-md-2 padtop15">
+                            <button type="submit" class="btn btn-default"><a href="/src/">Cancel</a></button>
+                        </div>
+                        {% if request.user.is_superuser %}
+                        <div class="col-md-2 padtop15">
+                            <button type="submit" class="btn btn-primary">
+                                {% if add %}
+                                    Add Record
+                                {% else %}
+                                    Update Record
+                                {% endif %}</button>
+                        </div>
+                        {% else %}
+                        <h3>BECOME SUPERUSER TO EDIT</h3>
+                        {% endif %}
+                    </div>
+                </form>
+            {% endif %}
+        </div>
+
+    </div>
+
+</div>
+
+{% endblock %}

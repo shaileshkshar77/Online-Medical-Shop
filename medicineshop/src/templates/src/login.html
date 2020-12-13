@@ -1,9 +1,9 @@
-{% extends 'accounts/base.html' %}
+{% extends 'src/base.html' %}
 
 {% block content %}
  <h1> Login</h1>
 
- <form class="site-form" action="/accounts/login/" method= "post">
+ <form class="site-form" action="/src/login/" method= "post">
  {% csrf_token %}
  {{form}}
  {% if request.GET.next %}

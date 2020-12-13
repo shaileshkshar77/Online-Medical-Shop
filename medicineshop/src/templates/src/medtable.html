@@ -1,0 +1,76 @@
+{% extends 'src/base.html' %}
+{% load static %}
+
+    {% block content %}
+<head>
+    
+    <title>All Medicine Details</title>
+</head>
+<body>
+<nav class="navbar navbar-inverse navbar-fixed-top">
+    <div class="container-fluid">
+        <div class="navbar-header">
+            <a href="/src/" class="navbar-brand"><span
+                    class="glyphicon glyphicon glyphicon-home"></span>&nbsp;HOME</a>
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#thisnav"
+            >
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            </button>
+        </div>
+        <div class="collapse navbar-collapse" id="thisnav">
+            <ul class="nav navbar-nav">
+                
+                <li class="dropdown"><a href="#" class="dropdown-toggle" data-toggle="dropdown">Medicine Management<b
+                        class="caret"></b></a>
+                    <ul id="med-menu" class="dropdown-menu inverse-dropdown">
+                        <li><a href="/src/medform/">Add Medicine Details</a></li>
+                        <li><a href="/src/medtable/">View Medicine Details</a></li>
+                    </ul>
+                </li>
+                
+                <li class="dropdown"><a href="#" class="dropdown-toggle" data-toggle="dropdown">Customer Management<b
+                        class="caret"></b></a>
+                    <ul id="cust-menu" class="dropdown-menu inverse-dropdown">
+                        <li><a href="/src/custform/">Add Customer Details</a></li>
+                        <li><a href="/src/custtable/">View Customer Details</a></li>
+                    </ul>
+                </li>
+               
+            </ul>
+        </div>
+    </div>
+</nav>
+
+<div class="container-fluid martop7">
+    <div class="jumbotron jumcust">
+        <h2>Medicine Details</h2>
+        <div class="row">
+            <div class="col-md-1">
+            </div>
+            <table border="1" class="table table-responsive table-hover col-md-10">
+                <tr>
+                    <th>Medicine Code</th>
+                    <th>Medicine Name</th>
+                    <th>Quantity</th>
+                    <th>Price</th>
+                    <th>Type</th>
+                </tr>
+                {% for foo in med %}
+                    <tr>
+                        <td class="idlink"><a href="/src/medformview{{ foo.m_id }}/">{{ foo.m_id }}</a></td>
+                        <td>{{ foo.mname }}</td>
+                        <td>{{ foo.quantity }}</td>
+                        <td>{{ foo.price }}</td>
+                        <td>{{ foo.m_type }}</td>
+                    </tr>
+                {% endfor %}
+            </table>
+        </div>
+        <footer><h3>Click on a Medicine ID to Update or Delete the record.</h3></footer>
+    </div>
+</div>
+
+
+{% endblock %}
