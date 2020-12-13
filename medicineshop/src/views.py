@@ -4,6 +4,7 @@ from .models import Order
 from .models import Medicine
 from .models import Payment
 from .models import availability
+from .models import orderlist
 from django.shortcuts import render,redirect
 from django.db import IntegrityError
 from django.contrib.auth.forms import UserCreationForm,AuthenticationForm
@@ -50,6 +51,11 @@ def home(request):
 def custform(request):
     dict = {'add': True}
     return render(request, 'src/cust.html', dict)
+
+def custord(request):
+    o = orderlist.objects.all()
+    dict = {'ord': o}
+    return render(request, 'src/custord.html', dict)
 
 
 def custforminsert(request):
@@ -121,7 +127,6 @@ def medforminsert(request):
 
 def medformupdate(request, foo):
     try:
-        print(foo)
         med = Medicine.objects.get(m_id=foo)
         med.m_id = request.POST['m_id']
         med.mname = request.POST['mname']
@@ -151,3 +156,54 @@ def medtable(request):
     med = Medicine.objects.all()
     dict = {"med": med}
     return render(request, 'src/medtable.html', dict)
+
+def ordform(request):
+    med=Medicine.objects.all()
+    dict = {'add': True,'med':med}
+    return render(request, 'src/ord.html', dict)
+
+
+def ordforminsert(request):
+    try:
+        o = orderlist()
+        o.o_id = request.POST['o_id']
+        o.m_id = request.POST['m_id']
+        o.c_id = request.POST['c_id']
+        o.quantity = request.POST['quantity']
+        o.save()
+    except IntegrityError:
+        return render(request, "src/new.html")
+    return render(request, 'src/index.html')
+
+
+def ordformupdate(request, foo):
+    try:
+        o = orderlist.objects.get(o_id=foo)
+        o.o_id = request.POST['o_id']
+        o.c_id = request.POST['c_id']
+        o.m_id = request.POST['m_id']
+        o.quantity = request.POST['quantity']
+        o.save()
+    except IntegrityError:
+        return render(request, "src/new.html")
+    return render(request, 'src/index.html')
+
+
+def ordformview(request, foo):
+    o = orderlist.objects.get(o_id=foo)
+    med=Medicine.objects.all()
+    dict = {'ord': o,'med':med}
+    return render(request, 'src/ord.html', dict)
+
+
+def ordformdelete(request, foo):
+    o = orderlist.objects.get(o_id=foo)
+    o.delete()
+    return render(request, 'src/index.html')
+
+
+def ordtable(request):
+    o = orderlist.objects.all()
+    med=Medicine.objects.all()
+    dict = {"ord": o,"med":med}
+    return render(request, 'src/ordtable.html', dict)

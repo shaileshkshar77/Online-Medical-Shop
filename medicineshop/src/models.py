@@ -18,21 +18,28 @@ class Insurance(models.Model):
     ins_no = models.IntegerField(unique=True)
     company = models.CharField(max_length=30)
     type_ins = models.CharField(max_length=30)
-    percent = models.IntegerField(unique=True)
+    percent = models.IntegerField()
 
     def __str__(self):
         return self.ins_no
 
 
 class Order(models.Model):
-    order_id = models.CharField(max_length=30,unique=True)
-    c_id = models.CharField(max_length=30)
+    o_id = models.CharField(max_length=30,unique=True)
     ins_no = models.IntegerField()
+    o_price=models.FloatField()
+
+    def __str__(self):
+        return self.o_id
+
+class orderlist(models.Model):
+    o_id = models.CharField(max_length=30)
+    c_id = models.CharField(max_length=30)
     m_id=models.CharField(max_length=30)
     quantity = models.IntegerField()
 
     def __str__(self):
-        return self.order_id
+        return self.o_id
 
 
 class Medicine(models.Model):
@@ -40,7 +47,7 @@ class Medicine(models.Model):
     mname = models.CharField(max_length=30)
     quantity = models.IntegerField()
     m_type = models.CharField(max_length=30)
-    price = models.IntegerField(max_length=30)
+    price = models.IntegerField()
 
     def __str__(self):
         return self.m_id

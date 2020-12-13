@@ -17,6 +17,7 @@ urlpatterns = [
     url(r'^custform/', views.custform, name="custform"),
     url(r'^custforminsert/', views.custforminsert, name="custforminsert"),
     url(r'^custformupdate(?P<foo>[0-9]+)/', views.custformupdate, name="custformupdate"),
+    url(r'^custord/', views.custord, name="custord"),
     url(r'^custformview(?P<foo>[0-9]+)/', views.custformview, name="custformview"),
     url(r'^custformdelete(?P<foo>[0-9]+)/', views.custformdelete, name="custformdelete"),
     url(r'^custtable/', views.custtable, name='custtable'),
@@ -27,6 +28,13 @@ urlpatterns = [
     url(r'^medformview(?P<foo>[0-9]+)/', views.medformview, name="medformview"),
     url(r'^medformdelete(?P<foo>[0-9]+)/', views.medformdelete, name="medformdelete"),
     url(r'^medtable/', views.medtable, name='medtable'),
+
+    url(r'^ordform/', views.ordform, name="ordform"),
+    url(r'^ordforminsert/', views.ordforminsert, name="ordforminsert"),
+    url(r'ordformupdate(?P<foo>[0-9]+)/', views.ordformupdate, name="ordformupdate"),
+    url(r'^ordformview(?P<foo>[0-9]+)/', views.ordformview, name="ordformview"),
+    url(r'^ordformdelete(?P<foo>[0-9]+)/', views.ordformdelete, name="ordformdelete"),
+    url(r'^ordtable/', views.ordtable, name='ordtable'),
 
     
 ]

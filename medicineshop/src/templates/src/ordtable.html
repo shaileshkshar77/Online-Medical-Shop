@@ -1,10 +1,10 @@
-
 {% extends 'src/base.html' %}
 {% load static %}
 
-{% block content %}
+    {% block content %}
 <head>
-    <title>Home</title>
+    
+    <title>All Order Details</title>
 </head>
 <body>
     <nav class="navbar navbar-inverse navbar-fixed-top">
@@ -51,7 +51,39 @@
             </div>
         </div>
     </nav>
+    {% if user.is_authenticated %}
 
+<div class="container-fluid martop7">
+    <div class="jumbotron jumcust">
+        <h2>Medicine Details</h2>
+        <div class="row">
+            <div class="col-md-1">
+            </div>
+            <table border="1" class="table table-responsive table-hover col-md-10">
+                <tr>
+                    <th>Order ID</th>
+                    <th>Medicine ID</th>
+                    <th>Medicine name</th>
+                    <th>Quantity</th>
+                    <th>Customer ID</th>
+                </tr>
+                {% for foo in ord %}
+                    <tr>
+                        <td class="idlink"><a href="/src/ordformview{{ foo.o_id }}/">{{ foo.o_id }}</a></td>
+                        <td>{{ foo.m_id }}</td>
+                        <td>{{ med.mname }}</td>
+                        <td>{{ foo.quantity }}</td>
+                        <td>{{ foo.c_id }}</td>
+                    </tr>
+                {% endfor %}
+            </table>
+        </div>
+        <footer><h3>Click on a Medicine ID to Update or Delete the record.</h3></footer>
+    </div>
+</div>
+{% else %}
+<h1> LOGIN TO ACCESS</h1>
+{% endif %}
 
 
 {% endblock %}
