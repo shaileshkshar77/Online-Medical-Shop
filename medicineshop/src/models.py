@@ -22,15 +22,6 @@ class Insurance(models.Model):
     def __str__(self):
         return self.ins_no
 
-
-class Order(models.Model):
-    o_id = models.CharField(max_length=30,unique=True)
-    ins_no = models.IntegerField()
-    o_price=models.FloatField()
-
-    def __str__(self):
-        return self.o_id
-
 class orderlist(models.Model):
     o_id = models.CharField(max_length=30)
     c_id = models.CharField(max_length=30)
@@ -54,7 +45,7 @@ class Medicine(models.Model):
 
 class Payment(models.Model):
     p_id=models.CharField(max_length=30,unique=True)
-    order_id = models.CharField(max_length=30)
+    c_id = models.CharField(max_length=30)
     cost = models.IntegerField()
     disc = models.IntegerField()
     

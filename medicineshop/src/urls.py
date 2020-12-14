@@ -17,7 +17,6 @@ urlpatterns = [
     url(r'^custform/', views.custform, name="custform"),
     url(r'^custforminsert/', views.custforminsert, name="custforminsert"),
     url(r'^custformupdate(?P<foo>[0-9]+)/', views.custformupdate, name="custformupdate"),
-    url(r'^custord/', views.custord, name="custord"),
     url(r'^custformview(?P<foo>[0-9]+)/', views.custformview, name="custformview"),
     url(r'^custformdelete(?P<foo>[0-9]+)/', views.custformdelete, name="custformdelete"),
     url(r'^custtable/', views.custtable, name='custtable'),
@@ -43,5 +42,4 @@ urlpatterns = [
     url(r'^insformdelete(?P<foo>[0-9]+)/', views.insformdelete, name="insformdelete"),
     url(r'^instable/', views.instable, name='instable'),
 
-    
 ]

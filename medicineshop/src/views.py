@@ -1,6 +1,5 @@
 from .models import Insurance
 from .models import Customer
-from .models import Order
 from .models import Medicine
 from .models import Payment
 from .models import availability
@@ -51,11 +50,6 @@ def home(request):
 def custform(request):
     dict = {'add': True}
     return render(request, 'src/cust.html', dict)
-
-def custord(request):
-    o = orderlist.objects.all()
-    dict = {'ord': o}
-    return render(request, 'src/custord.html', dict)
 
 
 def custforminsert(request):
