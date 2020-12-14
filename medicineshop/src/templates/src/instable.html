@@ -4,30 +4,28 @@
     {% block content %}
 <head>
     
-    <title>All Medicine Details</title>
+    <title>Insurance Details</title>
 </head>
 
 <div class="container-fluid martop7">
     <div class="jumbotron jumcust">
-        <h2>Medicine Details</h2>
+        <h2>Insurance Details</h2>
         <div class="row">
             <div class="col-md-1">
             </div>
             <table border="1" class="table table-responsive table-hover col-md-10">
                 <tr>
-                    <th>Medicine Code</th>
-                    <th>Medicine Name</th>
-                    <th>Quantity</th>
-                    <th>Price</th>
-                    <th>Type</th>
+                    <th>Customer ID</th>
+                    <th>Insurance Number</th>
+                    <th>Company</th>
+                    <th>Percent</th>
                 </tr>
-                {% for foo in med %}
+                {% for foo in ins %}
                     <tr>
-                        <td class="idlink"><a href="/src/medformview{{ foo.m_id }}/">{{ foo.m_id }}</a></td>
-                        <td>{{ foo.mname }}</td>
-                        <td>{{ foo.quantity }}</td>
-                        <td>{{ foo.price }}</td>
-                        <td>{{ foo.m_type }}</td>
+                        <td class="idlink"><a href="/src/insformview{{ foo.m_id }}/">{{ foo.c_id }}</a></td>
+                        <td>{{ foo.ins_no }}</td>
+                        <td>{{ foo.company }}</td>
+                        <td>{{ foo.percent }}</td>
                     </tr>
                 {% endfor %}
             </table>

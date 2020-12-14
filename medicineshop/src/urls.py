@@ -36,5 +36,12 @@ urlpatterns = [
     url(r'^ordformdelete(?P<foo>[0-9]+)/', views.ordformdelete, name="ordformdelete"),
     url(r'^ordtable/', views.ordtable, name='ordtable'),
 
+    url(r'^insform/', views.insform, name="insform"),
+    url(r'^insforminsert/', views.insforminsert, name="insforminsert"),
+    url(r'^insformupdate(?P<foo>[0-9]+)/', views.insformupdate, name="insformupdate"),
+    url(r'^insformview(?P<foo>[0-9]+)/', views.insformview, name="insformview"),
+    url(r'^insformdelete(?P<foo>[0-9]+)/', views.insformdelete, name="insformdelete"),
+    url(r'^instable/', views.instable, name='instable'),
+
     
 ]

@@ -14,10 +14,9 @@ class Customer(models.Model):
 
 
 class Insurance(models.Model):
-    c_id = models.CharField(max_length=30)
     ins_no = models.IntegerField(unique=True)
+    c_id = models.CharField(max_length=30)
     company = models.CharField(max_length=30)
-    type_ins = models.CharField(max_length=30)
     percent = models.IntegerField()
 
     def __str__(self):

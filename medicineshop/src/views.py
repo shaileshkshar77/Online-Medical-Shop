@@ -207,3 +207,53 @@ def ordtable(request):
     med=Medicine.objects.all()
     dict = {"ord": o,"med":med}
     return render(request, 'src/ordtable.html', dict)
+
+
+def insform(request):
+    dict = {'add': True}
+    return render(request, 'src/ins.html', dict)
+
+
+def insforminsert(request):
+    try:
+        i=Insurance()
+        i.ins_no = request.POST['ins_no']
+        i.c_id = request.POST['c_id']
+        i.company = request.POST['company']
+        i.percent = request.POST['percent']
+        i.save()
+    except IntegrityError:
+        return render(request, "src/new.html")
+    return render(request, 'src/index.html')
+
+
+def insformupdate(request, foo):
+    try:
+        i=Insurance.objects.get(ins_no=foo)
+        i.ins_no = request.POST['ins_no']
+        i.c_id = request.POST['c_id']
+        i.company = request.POST['company']
+        i.percent = request.POST['percent']
+        i.save()
+    except IntegrityError:
+        return render(request, "src/new.html")
+    return render(request, 'src/index.html')
+
+
+def insformview(request, foo):
+    i=Insurance.objects.get(ins_no=foo)
+    print(foo)
+    dict = {'ins': i}
+    return render(request, 'src/ins.html', dict)
+
+
+def insformdelete(request, foo):
+    i=Insurance.objects.get(ins_no=foo)
+    i.delete()
+    return render(request, 'src/index.html')
+
+
+def instable(request):
+    i=Insurance.objects.all()
+    dict = {"ins": i}
+    return render(request, 'src/instable.html', dict)

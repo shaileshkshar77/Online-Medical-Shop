@@ -4,12 +4,10 @@
 
     {% block content %}
 <head>
-    <title>Medicine Details</title>
+    <title>Insurance Details</title>
     
 </head>
 
-
-{% if user.is_authenticated %}
 
 <div class="container">
     <div class="col-md-2"></div>
@@ -17,54 +15,50 @@
         <div class="panel-heading">
             <h1 class="padtop5">
                 {% if add %}
-                    Add ORDER
+                    Add Insurance Details
                 {% else %}
-                    Update Order
+                    Update Insurance Details
                 {% endif %}</h1>
         </div>
         <div class="panel-body">
-            {% if ord %}
-                <form action="/src/ordformupdate{{ ord.o_id }}/" method="post">
+            {% if ins %}
+                <form action="/src/insformupdate{{ ins.ins_no }}/" method="post">
                     {% csrf_token %}
+                    <div class="row padtop15">
+                        <div class="col-md-3 padtop5">
+                            <label for="ins_no" class="form-control-label">Insurance Number:</label>
+                        </div>
+                        <div class="form-group col-md-4">
+                            <input type="text" name="ins_no" class="form-control" id="ins_no" placeholder="Insurance Number"
+                                   value="{{ ins.ins_no }}" required/>
+                        </div>
+                    </div>
                     <div class="row">
                         <div class="col-md-3 padtop5">
-                            <label for="o_id" class="form-control-label">Order no:</label>
+                            <label for="c_id" class="form-control-label">Customer Code:</label>
                         </div>
                         <div class="col-md-2">
-                            <input type="text" class="form-control" id="o_id" placeholder="Code" name="o_id"
-                                   value="{{ ord.m_id }}"/>
+                            <input type="text" class="form-control" id="c_id" placeholder="Code" name="c_id"
+                                   value="{{ ins.c_id }}"/>
                         </div>
                     </div>
                     
                     <div class="row padtop5">
                         <div class="col-md-3 padtop5">
-                            <label for="quantity" class="form-control-label">Quantity :</label>
+                            <label for="company" class="form-control-label">Company :</label>
                         </div>
                         <div class="form-group col-md-8">
-                            <input type="text" name="quantity" class="form-control" id="dname" placeholder="Quantity"
-                                   value="{{ ord.quantity }}"/>
+                            <input type="text" name="company" class="form-control" id="company" placeholder="company"
+                                   value="{{ ins.company }}"/>
                         </div>
                     </div>
                     <div class="row padtop5">
                         <div class="col-md-3">
-                            <label for="c_id" class="form-control-label padtop5">Customer ID:</label>
+                            <label for="percent" class="form-control-label padtop5">Percent:</label>
                         </div>
                         <div class="col-md-2">
-                            <input type="text" name="c_id" class="form-control" id="c_id" placeholder="Customer ID"
-                                   value="{{ ord.c_id }}" required/>
-                        </div>
-                    </div>
-                    <div class="row padtop15">
-                        <div class="col-md-3 padtop5">
-                            <label for="mname" class="form-control-label">Medicine Name:</label>
-                        </div>
-                        <div class="form-group col-md-4">
-                            
-                                <select name="m_id">
-                                    {% for entry in med %}
-                                    <option value="{{entry.m_id}}">{{entry.m_id}}</option>
-                                    {% endfor %}
-                                </select>
+                            <input type="text" name="percent" class="form-control" id="percent" placeholder="percent"
+                                   value="{{ ins.percent }}" required/>
                         </div>
                     </div>
                     <div class="row" id="buttoncustom">
@@ -72,7 +66,7 @@
                         <div class="col-md-2 padtop15">
                             <button type="submit" class="btn btn-default"><a href="/src/">Cancel</a></button>
                         </div>
-                        
+                        {% if user.is_authenticated %}
                         <div class="col-md-2 padtop15">
                             <button type="submit" class="btn btn-primary">
                                 {% if add %}
@@ -83,54 +77,51 @@
                         </div>
                         <div class="col-md-offset-8 padtop15">
                             <button type="submit" class="delbut btn btn-danger"><a
-                                    href="/src/ordformdelete{{ ord.m_id }}/">Delete Record</a></button>
+                                    href="/src/insformdelete{{ins.ins_no }}/">Delete Record</a></button>
                         </div>
-                        
+                        {% else %}
+                        <h3>LOGIN TO EDIT</h3>
+                        {% endif %}
                         
                     </div>
                 </form>
             {% else %}
-                <form action="/src/ordforminsert/" method="post">
+                <form action="/src/insforminsert/" method="post">
                     {% csrf_token %}
-                    <div class="row">
+                    <div class="row padtop15">
                         <div class="col-md-3 padtop5">
-                            <label for="o_id" class="form-control-label">Order no:</label>
+                            <label for="ins_no" class="form-control-label">Insurance Number:</label>
                         </div>
-                        <div class="col-md-2">
-                            <input type="text" class="form-control" id="o_id" placeholder="Code" name="o_id"
-                                   value="{{ ord.m_id }}"/>
+                        <div class="form-group col-md-4">
+                            <input type="text" name="ins_no" class="form-control" id="ins_no" placeholder="Insurance Number"
+                                   value="{{ ins.ins_no }}" required/>
                         </div>
                     </div>
-                    
+                    <div class="row">
+                        <div class="col-md-3 padtop5">
+                            <label for="c_id" class="form-control-label">Customer Code:</label>
+                        </div>
+                        <div class="col-md-2">
+                            <input type="text" class="form-control" id="c_id" placeholder="Code" name="c_id"
+                                   value="{{ ins.c_id }}"/>
+                        </div>
+                    </div>
                     <div class="row padtop5">
                         <div class="col-md-3 padtop5">
-                            <label for="quantity" class="form-control-label">Quantity :</label>
+                            <label for="company" class="form-control-label">Company :</label>
                         </div>
                         <div class="form-group col-md-8">
-                            <input type="text" name="quantity" class="form-control" id="dname" placeholder="Quantity"
-                                   value="{{ ord.quantity }}"/>
+                            <input type="text" name="company" class="form-control" id="company" placeholder="company"
+                                   value="{{ ins.company }}"/>
                         </div>
                     </div>
                     <div class="row padtop5">
                         <div class="col-md-3">
-                            <label for="c_id" class="form-control-label padtop5">Customer ID:</label>
+                            <label for="percent" class="form-control-label padtop5">Percent:</label>
                         </div>
                         <div class="col-md-2">
-                            <input type="text" name="c_id" class="form-control" id="c_id" placeholder="Customer ID"
-                                   value="{{ ord.c_id }}" required/>
-                        </div>
-                    </div>
-                    <div class="row padtop15">
-                        <div class="col-md-3 padtop5">
-                            <label for="mname" class="form-control-label">Medicine Name:</label>
-                        </div>
-                        <div class="form-group col-md-4">
-                            
-                                <select name="m_id">
-                                    {% for entry in med %}
-                                    <option value="{{entry.m_id}}">{{entry.m_id}}</option>
-                                    {% endfor %}
-                                </select>
+                            <input type="text" name="percent" class="form-control" id="percent" placeholder="percent"
+                                   value="{{ ins.percent }}" required/>
                         </div>
                     </div>
                     <div class="row" id="buttoncustom">
@@ -138,7 +129,7 @@
                         <div class="col-md-2 padtop15">
                             <button type="submit" class="btn btn-default"><a href="/src/">Cancel</a></button>
                         </div>
-                        
+                        {% if user.is_authenticated %}
                         <div class="col-md-2 padtop15">
                             <button type="submit" class="btn btn-primary">
                                 {% if add %}
@@ -147,7 +138,9 @@
                                     Update Record
                                 {% endif %}</button>
                         </div>
-                       
+                        {% else %}
+                        <h3>LOGIN TO EDIT</h3>
+                        {% endif %}
                     </div>
                 </form>
             {% endif %}
@@ -156,8 +149,5 @@
     </div>
 
 </div>
-{% else %}
-<h1> LOGIN TO ACCESS</h1>
-{% endif %}
 
 {% endblock %}
