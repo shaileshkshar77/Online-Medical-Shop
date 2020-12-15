@@ -1,0 +1,21 @@
+{% extends 'src/base.html' %}
+{% load static %}
+
+    {% block content %}
+<head>
+    
+    <title>THANK YOU</title>
+</head>
+
+    {% if user.is_authenticated %}
+
+<h2>THANK YOU FOR THE ORDER</h2>
+<h3><button type="submit" class="delbut btn btn-danger"><a
+    href="/feedback/">CLICK FOR FEEDBACK</a></button></h3>
+
+{% else %}
+<h1> LOGIN TO ACCESS</h1>
+{% endif %}
+
+
+{% endblock %}

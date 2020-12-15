@@ -208,7 +208,8 @@ def ordtable(request):
 
 
 def insform(request):
-    dict = {'add': True}
+    c=Customer.objects.all()
+    dict = {'add': True,'cust':c}
     return render(request, 'src/ins.html', dict)
 
 
@@ -240,8 +241,9 @@ def insformupdate(request, foo):
 
 def insformview(request, foo):
     i=Insurance.objects.get(ins_no=foo)
+    c=Customer.objects.all()
     print(foo)
-    dict = {'ins': i}
+    dict = {'ins': i,'cust':c}
     return render(request, 'src/ins.html', dict)
 
 
@@ -265,8 +267,15 @@ def cart(request):
 def viewpurchase(request):
     c = request.POST['c_id']
     o = orderlist.objects.filter(c_id=c)
+    i=Insurance.objects.get(c_id=c)
     s=0
     for obj in o:
         s+=obj.cost
+    s=s*(100-i.percent)
+    s=s/100
     dict = {"ord": o,"s":s}
     return render(request, 'src/viewcart.html', dict)
+
+
+def check(request):
+    return render(request, 'src/check.html')

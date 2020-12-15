@@ -33,13 +33,17 @@
                                    value="{{ ins.ins_no }}" required/>
                         </div>
                     </div>
-                    <div class="row">
+                    <div class="row padtop15">
                         <div class="col-md-3 padtop5">
-                            <label for="c_id" class="form-control-label">Customer Code:</label>
+                            <label for="c_id" class="form-control-label">Customer ID:</label>
                         </div>
-                        <div class="col-md-2">
-                            <input type="text" class="form-control" id="c_id" placeholder="Code" name="c_id"
-                                   value="{{ ins.c_id }}"/>
+                        <div class="form-group col-md-4">
+                            
+                                <select name="c_id">
+                                    {% for entry in cust %}
+                                    <option value="{{entry.c_id}}">{{entry.c_id}}</option>
+                                    {% endfor %}
+                                </select>
                         </div>
                     </div>
                     
@@ -97,13 +101,17 @@
                                    value="{{ ins.ins_no }}" required/>
                         </div>
                     </div>
-                    <div class="row">
+                    <div class="row padtop15">
                         <div class="col-md-3 padtop5">
-                            <label for="c_id" class="form-control-label">Customer Code:</label>
+                            <label for="c_id" class="form-control-label">Customer ID:</label>
                         </div>
-                        <div class="col-md-2">
-                            <input type="text" class="form-control" id="c_id" placeholder="Code" name="c_id"
-                                   value="{{ ins.c_id }}"/>
+                        <div class="form-group col-md-4">
+                            
+                                <select name="c_id">
+                                    {% for entry in cust %}
+                                    <option value="{{entry.c_id}}">{{entry.c_id}}</option>
+                                    {% endfor %}
+                                </select>
                         </div>
                     </div>
                     <div class="row padtop5">

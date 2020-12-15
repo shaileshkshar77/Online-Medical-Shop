@@ -1,0 +1,57 @@
+
+{% extends 'feedback/base.html' %}
+{% load static %}
+
+    {% block content %}
+<head>
+    <title>feedback</title>
+    
+</head>
+
+    
+{% if user.is_authenticated %}
+<div class="container">
+    <div class="col-md-2"></div>
+    <div class="panel panel-default col-md-8 jumcust2">
+        
+        <div class="panel-body">
+                <form action="/feedback/gvfdk/" method="post">
+                    {% csrf_token %}
+                    <div class="row padtop15">
+                        <div class="col-md-3 padtop5">
+                            <label for="c_id" class="form-control-label">ID:</label>
+                        </div>
+                        <div class="form-group col-md-4">
+                            <input type="text" name="c_id" class="form-control" id="c_id" placeholder="ID"
+                                   value="{{ fdk.c_id }}" required/>
+                        </div>
+                        
+                    </div>
+                    <div class="row padtop15">
+                        <div class="col-md-3 padtop5">
+                            <label for="feedbacks" class="form-control-label">feedback:</label>
+                        </div>
+                        <div class="form-group col-md-4">
+                            <input type="text" name="feedbacks" class="form-control" id="feedbacks" placeholder="feedbacks"
+                                   value="{{ fdk.feedbacks }}" required/>
+                        </div>
+                       
+                    </div>
+                  
+                            <button type="submit" class="btn btn-default"><a href="/src/">Cancel</a></button>
+                        </div>
+                        <div class="col-md-2 padtop15">
+                            <button type="submit" class="btn btn-primary">
+                                submit</button>
+                        </div>
+                        
+                    </div>
+                </form>
+           
+{% else %}
+<h1> LOGIN TO ACCESS</h1>
+{% endif %}
+
+{% endblock %}
+
+
