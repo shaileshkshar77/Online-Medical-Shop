@@ -164,6 +164,8 @@ def ordforminsert(request):
         o.m_id = request.POST['m_id']
         o.c_id = request.POST['c_id']
         o.quantity = request.POST['quantity']
+        m=Medicine.objects.get(m_id=o.m_id)
+        o.cost=int(m.price)*int(o.quantity)
         o.save()
     except IntegrityError:
         return render(request, "src/new.html")
@@ -177,6 +179,8 @@ def ordformupdate(request, foo):
         o.c_id = request.POST['c_id']
         o.m_id = request.POST['m_id']
         o.quantity = request.POST['quantity']
+        m=Medicine.objects.get(m_id=o.m_id)
+        o.cost=int(m.price)*int(o.quantity)
         o.save()
     except IntegrityError:
         return render(request, "src/new.html")
@@ -251,3 +255,18 @@ def instable(request):
     i=Insurance.objects.all()
     dict = {"ins": i}
     return render(request, 'src/instable.html', dict)
+
+
+def cart(request):
+    c=Customer.objects.all()
+    dict = {"cust": c}
+    return render(request, 'src/cart.html', dict)
+
+def viewpurchase(request):
+    c = request.POST['c_id']
+    o = orderlist.objects.filter(c_id=c)
+    s=0
+    for obj in o:
+        s+=obj.cost
+    dict = {"ord": o,"s":s}
+    return render(request, 'src/viewcart.html', dict)

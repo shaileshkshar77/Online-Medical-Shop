@@ -23,10 +23,11 @@ class Insurance(models.Model):
         return self.ins_no
 
 class orderlist(models.Model):
-    o_id = models.CharField(max_length=30)
+    o_id = models.CharField(max_length=30,unique=True)
     c_id = models.CharField(max_length=30)
     m_id=models.CharField(max_length=30)
     quantity = models.IntegerField()
+    cost=models.IntegerField()
 
     def __str__(self):
         return self.o_id

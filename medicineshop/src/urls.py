@@ -42,4 +42,8 @@ urlpatterns = [
     url(r'^insformdelete(?P<foo>[0-9]+)/', views.insformdelete, name="insformdelete"),
     url(r'^instable/', views.instable, name='instable'),
 
+    url(r'^cart/', views.cart, name="cart"),
+    
+    url(r'^viewpurchase/', views.viewpurchase, name="viewpurchase"),
+
 ]
