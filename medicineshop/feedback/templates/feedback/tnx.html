@@ -1,0 +1,20 @@
+{% extends 'feedback/base.html' %}
+{% load static %}
+
+    {% block content %}
+<head>
+    
+    <title>THANK YOU</title>
+</head>
+
+    {% if user.is_authenticated %}
+
+<h2>THANK YOU FOR THE FEEDBACK</h2>
+
+
+{% else %}
+<h1> LOGIN TO ACCESS</h1>
+{% endif %}
+
+
+{% endblock %}

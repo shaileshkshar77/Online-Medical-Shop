@@ -38,6 +38,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'src',
+    'feedback',
 ]
 
 MIDDLEWARE = [
@@ -82,8 +83,14 @@ DATABASES = {
         'PASSWORD': 'test123',
         'HOST': 'localhost',  
         'PORT': '3306',
+    },
+    'feedback': {
+        'ENGINE': 'djongo',
+        'NAME':  'feedback',
     }
 }
+
+DATABASE_ROUTERS = ['feedback.dbrouter.DBRouter1', ]
 
 
 # Password validation
