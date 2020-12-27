@@ -7,7 +7,16 @@
     <title>Medicine Details</title>
     
 </head>
-
+<head>
+    <style>
+    body {
+      background-image: url('../../static/medicineshop/images/order.jpg');
+      background-repeat: no-repeat;
+      background-attachment: fixed;  
+      background-size: cover;
+    }
+    </style>
+    </head>
 
 <div class="container">
     <div class="col-md-2"></div>
@@ -72,11 +81,11 @@
                     <div class="row" id="buttoncustom">
                         <div class="col-md-3"></div>
                         <div class="col-md-2 padtop15">
-                            <button type="submit" class="btn btn-default"><a href="/src/">Cancel</a></button>
+                            <button type="submit" class="btn btn-danger"><a href="/src/">Cancel</a></button>
                         </div>
                         {% if request.user.is_superuser %}
                         <div class="col-md-2 padtop15">
-                            <button type="submit" class="btn btn-primary">
+                            <button type="submit" class="btn btn-sucess">
                                 {% if add %}
                                     Add Record
                                 {% else %}
@@ -88,7 +97,7 @@
                                     href="/src/medformdelete{{ med.m_id }}/">Delete Record</a></button>
                         </div>
                         {% else %}
-                        <h3>BECOME SUPERUSER TO EDIT</h3>
+                        <h2>Login to access!</h2>
                         {% endif %}
                         
                     </div>
@@ -144,11 +153,11 @@
                     <div class="row" id="buttoncustom">
                         <div class="col-md-3"></div>
                         <div class="col-md-2 padtop15">
-                            <button type="submit" class="btn btn-default"><a href="/src/">Cancel</a></button>
+                            <button type="submit" class="btn btn-danger"><a href="/src/">Cancel</a></button>
                         </div>
                         {% if request.user.is_superuser %}
                         <div class="col-md-2 padtop15">
-                            <button type="submit" class="btn btn-primary">
+                            <button type="submit" class="btn btn-sucess">
                                 {% if add %}
                                     Add Record
                                 {% else %}
@@ -156,7 +165,7 @@
                                 {% endif %}</button>
                         </div>
                         {% else %}
-                        <h3>BECOME SUPERUSER TO EDIT</h3>
+                        <h2>Login to access!</h2>
                         {% endif %}
                     </div>
                 </form>
