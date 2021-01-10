@@ -278,11 +278,15 @@ def viewpurchase(request):
     return render(request, 'src/viewcart.html', dict)
 
 def pres(request):
-    return render(request, "src/pres.html", context) 
+    context = {} 
+    form = prescription() 
+    context['form']= form 
+    return render(request, "src/pres.html",context) 
 
 def check(request):
-    context = {} 
+    
     if request.method == "POST": 
+        context = {}
         form = prescription(request.POST, request.FILES) 
         if form.is_valid(): 
             name = form.cleaned_data.get("c_id") 
