@@ -54,10 +54,9 @@ class Payment(models.Model):
     def __str__(self):
         return self.p_id
 
-class availability(models.Model):
-    m_id=models.CharField(max_length=30,unique=True)
-    options = models.IntegerField()
-    number = models.IntegerField()
-
-    def __str__(self):
-        return self.m_id
+class prescModel(models.Model): 
+    c_id = models.IntegerField() 
+    img = models.ImageField(upload_to = "images/") 
+  
+    def __str__(self): 
+        return self.c_id

@@ -43,6 +43,7 @@ urlpatterns = [
     url(r'^instable/', views.instable, name='instable'),
 
     url(r'^cart/', views.cart, name="cart"),
+    url(r'^pres/', views.pres, name="pres"),
     url(r'^check/', views.check, name="check"),
     
     url(r'^viewpurchase/', views.viewpurchase, name="viewpurchase"),

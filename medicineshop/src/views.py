@@ -2,7 +2,8 @@ from .models import Insurance
 from .models import Customer
 from .models import Medicine
 from .models import Payment
-from .models import availability
+from .models import prescModel
+from .forms import prescription
 from .models import orderlist
 from django.shortcuts import render,redirect
 from django.db import IntegrityError
@@ -276,6 +277,22 @@ def viewpurchase(request):
     dict = {"ord": o,"s":s}
     return render(request, 'src/viewcart.html', dict)
 
+def pres(request):
+    return render(request, "src/pres.html", context) 
 
 def check(request):
+    context = {} 
+    if request.method == "POST": 
+        form = prescription(request.POST, request.FILES) 
+        if form.is_valid(): 
+            name = form.cleaned_data.get("c_id") 
+            image = form.cleaned_data.get("img") 
+            obj = prescModel.objects.create( 
+                                 c_id = name,  
+                                 img = image
+                                 ) 
+            obj.save(using="feedback") 
+    else: 
+        form = prescription() 
+    context['form']= form 
     return render(request, 'src/check.html')
