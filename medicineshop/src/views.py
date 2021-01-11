@@ -1,9 +1,10 @@
 from .models import Insurance
 from .models import Customer
-from .models import Order
 from .models import Medicine
 from .models import Payment
-from .models import availability
+from .models import prescModel
+from .forms import prescription
+from .models import orderlist
 from django.shortcuts import render,redirect
 from django.db import IntegrityError
 from django.contrib.auth.forms import UserCreationForm,AuthenticationForm
@@ -98,3 +99,204 @@ def custtable(request):
     cust = Customer.objects.all()
     dict = {"cust": cust}
     return render(request, 'src/custtable.html', dict)
+
+
+def medform(request):
+    dict = {'add': True}
+    return render(request, 'src/med.html', dict)
+
+
+def medforminsert(request):
+    try:
+        med = Medicine()
+        med.m_id = request.POST['m_id']
+        med.mname = request.POST['mname']
+        med.quantity = request.POST['quantity']
+        med.m_type = request.POST['type']
+        med.price = request.POST['price']
+        med.save()
+    except IntegrityError:
+        return render(request, "src/new.html")
+    return render(request, 'src/index.html')
+
+
+def medformupdate(request, foo):
+    try:
+        med = Medicine.objects.get(m_id=foo)
+        med.m_id = request.POST['m_id']
+        med.mname = request.POST['mname']
+        med.quantity = request.POST['quantity']
+        med.m_type = request.POST['type']
+        med.price = request.POST['price']
+        med.save()
+    except IntegrityError:
+        return render(request, "src/new.html")
+    return render(request, 'src/index.html')
+
+
+def medformview(request, foo):
+    med = Medicine.objects.get(m_id=foo)
+    print(foo)
+    dict = {'med': med}
+    return render(request, 'src/med.html', dict)
+
+
+def medformdelete(request, foo):
+    med = Medicine.objects.get(m_id=foo)
+    med.delete()
+    return render(request, 'src/index.html')
+
+
+def medtable(request):
+    med = Medicine.objects.all()
+    dict = {"med": med}
+    return render(request, 'src/medtable.html', dict)
+
+def ordform(request):
+    med=Medicine.objects.all()
+    dict = {'add': True,'med':med}
+    return render(request, 'src/ord.html', dict)
+
+
+def ordforminsert(request):
+    try:
+        o = orderlist()
+        o.o_id = request.POST['o_id']
+        o.m_id = request.POST['m_id']
+        o.c_id = request.POST['c_id']
+        o.quantity = request.POST['quantity']
+        m=Medicine.objects.get(m_id=o.m_id)
+        o.cost=int(m.price)*int(o.quantity)
+        o.save()
+    except IntegrityError:
+        return render(request, "src/new.html")
+    return render(request, 'src/index.html')
+
+
+def ordformupdate(request, foo):
+    try:
+        o = orderlist.objects.get(o_id=foo)
+        o.o_id = request.POST['o_id']
+        o.c_id = request.POST['c_id']
+        o.m_id = request.POST['m_id']
+        o.quantity = request.POST['quantity']
+        m=Medicine.objects.get(m_id=o.m_id)
+        o.cost=int(m.price)*int(o.quantity)
+        o.save()
+    except IntegrityError:
+        return render(request, "src/new.html")
+    return render(request, 'src/index.html')
+
+
+def ordformview(request, foo):
+    o = orderlist.objects.get(o_id=foo)
+    med=Medicine.objects.all()
+    dict = {'ord': o,'med':med}
+    return render(request, 'src/ord.html', dict)
+
+
+def ordformdelete(request, foo):
+    o = orderlist.objects.get(o_id=foo)
+    o.delete()
+    return render(request, 'src/index.html')
+
+
+def ordtable(request):
+    o = orderlist.objects.all()
+    med=Medicine.objects.all()
+    dict = {"ord": o,"med":med}
+    return render(request, 'src/ordtable.html', dict)
+
+
+def insform(request):
+    c=Customer.objects.all()
+    dict = {'add': True,'cust':c}
+    return render(request, 'src/ins.html', dict)
+
+
+def insforminsert(request):
+    try:
+        i=Insurance()
+        i.ins_no = request.POST['ins_no']
+        i.c_id = request.POST['c_id']
+        i.company = request.POST['company']
+        i.percent = request.POST['percent']
+        i.save()
+    except IntegrityError:
+        return render(request, "src/new.html")
+    return render(request, 'src/index.html')
+
+
+def insformupdate(request, foo):
+    try:
+        i=Insurance.objects.get(ins_no=foo)
+        i.ins_no = request.POST['ins_no']
+        i.c_id = request.POST['c_id']
+        i.company = request.POST['company']
+        i.percent = request.POST['percent']
+        i.save()
+    except IntegrityError:
+        return render(request, "src/new.html")
+    return render(request, 'src/index.html')
+
+
+def insformview(request, foo):
+    i=Insurance.objects.get(ins_no=foo)
+    c=Customer.objects.all()
+    print(foo)
+    dict = {'ins': i,'cust':c}
+    return render(request, 'src/ins.html', dict)
+
+
+def insformdelete(request, foo):
+    i=Insurance.objects.get(ins_no=foo)
+    i.delete()
+    return render(request, 'src/index.html')
+
+
+def instable(request):
+    i=Insurance.objects.all()
+    dict = {"ins": i}
+    return render(request, 'src/instable.html', dict)
+
+
+def cart(request):
+    c=Customer.objects.all()
+    dict = {"cust": c}
+    return render(request, 'src/cart.html', dict)
+
+def viewpurchase(request):
+    c = request.POST['c_id']
+    o = orderlist.objects.filter(c_id=c)
+    i=Insurance.objects.get(c_id=c)
+    s=0
+    for obj in o:
+        s+=obj.cost
+    s=s*(100-i.percent)
+    s=s/100
+    dict = {"ord": o,"s":s}
+    return render(request, 'src/viewcart.html', dict)
+
+def pres(request):
+    context = {} 
+    form = prescription() 
+    context['form']= form 
+    return render(request, "src/pres.html",context) 
+
+def check(request):
+    
+    if request.method == "POST": 
+        context = {}
+        form = prescription(request.POST, request.FILES) 
+        if form.is_valid(): 
+            name = form.cleaned_data.get("c_id") 
+            image = form.cleaned_data.get("img") 
+            obj = prescModel.objects.create( 
+                                 c_id = name,  
+                                 img = image
+                                 ) 
+            obj.save(using="feedback") 
+    else: 
+        form = prescription() 
+    context['form']= form 
+    return render(request, 'src/check.html')

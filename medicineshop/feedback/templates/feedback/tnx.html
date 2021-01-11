@@ -1,0 +1,40 @@
+{% extends 'feedback/base.html' %}
+{% load static %}
+
+    {% block content %}
+<head>
+    <style>
+        body {
+          background-image: url('../../../static/medicineshop/images/feedback1.jpg');
+          background-repeat: no-repeat;
+          background-attachment: fixed;  
+          background-size: cover;
+        }
+        </style>
+        </head>
+        <style>
+            h2{
+            font-family:sans-serif;
+            text-transform:uppercase;
+            letter-spacing:6pt;
+            font: size 2em;
+            color:black;
+            line-height:1.6em;
+            text-align: center;
+          }
+          
+          </style>
+    <title>THANK YOU</title>
+</head>
+
+    {% if user.is_authenticated %}
+
+<h2>THANK YOU FOR THE FEEDBACK</h2>
+
+
+{% else %}
+<h1> LOGIN TO ACCESS</h1>
+{% endif %}
+
+
+{% endblock %}

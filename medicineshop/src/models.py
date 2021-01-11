@@ -14,33 +14,31 @@ class Customer(models.Model):
 
 
 class Insurance(models.Model):
-    c_id = models.CharField(max_length=30)
     ins_no = models.IntegerField(unique=True)
+    c_id = models.CharField(max_length=30)
     company = models.CharField(max_length=30)
-    type_ins = models.CharField(max_length=30)
-    percent = models.IntegerField(unique=True)
+    percent = models.IntegerField()
 
     def __str__(self):
         return self.ins_no
 
-
-class Order(models.Model):
-    order_id = models.CharField(max_length=30,unique=True)
+class orderlist(models.Model):
+    o_id = models.CharField(max_length=30,unique=True)
     c_id = models.CharField(max_length=30)
-    ins_no = models.IntegerField()
     m_id=models.CharField(max_length=30)
     quantity = models.IntegerField()
+    cost=models.IntegerField()
 
     def __str__(self):
-        return self.order_id
+        return self.o_id
 
 
 class Medicine(models.Model):
     m_id=models.CharField(max_length=30,unique=True)
+    mname = models.CharField(max_length=30)
     quantity = models.IntegerField()
     m_type = models.CharField(max_length=30)
-    price = models.IntegerField(max_length=30)
-    stock = models.IntegerField()
+    price = models.IntegerField()
 
     def __str__(self):
         return self.m_id
@@ -48,7 +46,7 @@ class Medicine(models.Model):
 
 class Payment(models.Model):
     p_id=models.CharField(max_length=30,unique=True)
-    order_id = models.CharField(max_length=30)
+    c_id = models.CharField(max_length=30)
     cost = models.IntegerField()
     disc = models.IntegerField()
     
@@ -56,10 +54,9 @@ class Payment(models.Model):
     def __str__(self):
         return self.p_id
 
-class availability(models.Model):
-    m_id=models.CharField(max_length=30,unique=True)
-    options = models.IntegerField()
-    number = models.IntegerField()
-
-    def __str__(self):
-        return self.m_id
+class prescModel(models.Model): 
+    c_id = models.IntegerField() 
+    img = models.ImageField(upload_to = "images/") 
+  
+    def __str__(self): 
+        return self.c_id

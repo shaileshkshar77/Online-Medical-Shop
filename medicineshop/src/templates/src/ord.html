@@ -1,0 +1,173 @@
+
+{% extends 'src/base.html' %}
+{% load static %}
+
+    {% block content %}
+<head>
+    <title>ORDER Details</title>
+    
+</head>
+<head>
+    <style>
+    body {
+      background-image: url('../../static/medicineshop/images/ord.jpg');
+      background-repeat: no-repeat;
+      background-attachment: fixed;  
+      background-size: cover;
+    }
+    </style>
+    </head>
+
+{% if user.is_authenticated %}
+
+
+<div class="container">
+    <div class="col-md-2"></div>
+    <div class="panel panel-default col-md-8 jumcust2">
+        <div class="panel-heading">
+            <h1 class="padtop5">
+                {% if add %}
+                    Add ORDER
+                {% else %}
+                    Update Order
+                {% endif %}</h1>
+        </div>
+        <div class="panel-body">
+            {% if ord %}
+                <form action="/src/ordformupdate{{ ord.o_id }}/" method="post">
+                    {% csrf_token %}
+                    <div class="row">
+                        <div class="col-md-3 padtop5">
+                            <label for="o_id" class="form-control-label">Order no:</label>
+                        </div>
+                        <div class="col-md-2">
+                            <input type="text" class="form-control" id="o_id" placeholder="Code" name="o_id"
+                                   value="{{ ord.o_id }}"/>
+                        </div>
+                    </div>
+                    
+                    <div class="row padtop5">
+                        <div class="col-md-3 padtop5">
+                            <label for="quantity" class="form-control-label">Quantity :</label>
+                        </div>
+                        <div class="form-group col-md-8">
+                            <input type="text" name="quantity" class="form-control" id="dname" placeholder="Quantity"
+                                   value="{{ ord.quantity }}"/>
+                        </div>
+                    </div>
+                    <div class="row padtop5">
+                        <div class="col-md-3">
+                            <label for="c_id" class="form-control-label padtop5">Customer ID:</label>
+                        </div>
+                        <div class="col-md-2">
+                            <input type="text" name="c_id" class="form-control" id="c_id" placeholder="Customer ID"
+                                   value="{{ ord.c_id }}" required/>
+                        </div>
+                    </div>
+                    <div class="row padtop15">
+                        <div class="col-md-3 padtop5">
+                            <label for="mname" class="form-control-label">Medicine ID:</label>
+                        </div>
+                        <div class="form-group col-md-4">
+                            
+                                <select name="m_id">
+                                    {% for entry in med %}
+                                    <option value="{{entry.m_id}}">{{entry.m_id}}</option>
+                                    {% endfor %}
+                                </select>
+                        </div>
+                    </div>
+                    <div class="row" id="buttoncustom">
+                        <div class="col-md-3"></div>
+                        <div class="col-md-2 padtop15">
+                            <button type="submit" class="btn btn-default"><a href="/src/">Cancel</a></button>
+                        </div>
+                        
+                        <div class="col-md-2 padtop15">
+                            <button type="submit" class="btn btn-primary">
+                                {% if add %}
+                                    Add Record
+                                {% else %}
+                                    Update Record
+                                {% endif %}</button>
+                        </div>
+                        <div class="col-md-offset-8 padtop15">
+                            <button type="submit" class="delbut btn btn-danger"><a
+                                    href="/src/ordformdelete{{ ord.o_id }}/">Delete Record</a></button>
+                        </div>
+                        
+                        
+                    </div>
+                </form>
+            {% else %}
+                <form action="/src/ordforminsert/" method="post">
+                    {% csrf_token %}
+                    <div class="row">
+                        <div class="col-md-3 padtop5">
+                            <label for="o_id" class="form-control-label">Order no:</label>
+                        </div>
+                        <div class="col-md-2">
+                            <input type="text" class="form-control" id="o_id" placeholder="Code" name="o_id"
+                                   value="{{ ord.o_id }}"/>
+                        </div>
+                    </div>
+                    
+                    <div class="row padtop5">
+                        <div class="col-md-3 padtop5">
+                            <label for="quantity" class="form-control-label">Quantity :</label>
+                        </div>
+                        <div class="form-group col-md-8">
+                            <input type="text" name="quantity" class="form-control" id="dname" placeholder="Quantity"
+                                   value="{{ ord.quantity }}"/>
+                        </div>
+                    </div>
+                    <div class="row padtop5">
+                        <div class="col-md-3">
+                            <label for="c_id" class="form-control-label padtop5">Customer ID:</label>
+                        </div>
+                        <div class="col-md-2">
+                            <input type="text" name="c_id" class="form-control" id="c_id" placeholder="Customer ID"
+                                   value="{{ ord.c_id }}" required/>
+                        </div>
+                    </div>
+                    <div class="row padtop15">
+                        <div class="col-md-3 padtop5">
+                            <label for="mname" class="form-control-label">Medicine ID:</label>
+                        </div>
+                        <div class="form-group col-md-4">
+                            
+                                <select name="m_id">
+                                    {% for entry in med %}
+                                    <option value="{{entry.m_id}}">{{entry.m_id}}</option>
+                                    {% endfor %}
+                                </select>
+                        </div>
+                    </div>
+                    <div class="row" id="buttoncustom">
+                        <div class="col-md-3"></div>
+                        <div class="col-md-2 padtop15">
+                            <button type="submit" class="btn btn-default"><a href="/src/">Cancel</a></button>
+                        </div>
+                        
+                        <div class="col-md-2 padtop15">
+                            <button type="submit" class="btn btn-primary">
+                                {% if add %}
+                                    Add Record
+                                {% else %}
+                                    Update Record
+                                {% endif %}</button>
+                        </div>
+                       
+                    </div>
+                </form>
+            {% endif %}
+        </div>
+
+    </div>
+
+</div>
+{% else %}
+<h1> LOGIN TO ACCESS</h1>
+{% endif %}
+
+{% endblock %}

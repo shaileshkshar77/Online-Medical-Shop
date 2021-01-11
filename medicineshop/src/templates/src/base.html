@@ -5,7 +5,95 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
-  <!--<link rel="icon" href="{% static 'img/RVCE_New_Logo.jpeg' %}" type="image/jpeg" sizes="16x16">-->
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+  <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+   
+  <link rel="stylesheet"  href="../../static/medicineshop/css/base.css">   
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <a class="navbar-brand" href="/src/">Home</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+      
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+          <ul class="navbar-nav mr-auto">
+            <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                  Medicine Management
+              </a>
+              <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                <a class="dropdown-item" href="/src/medform/">Add Medicine Details</a>
+                <a class="dropdown-item" href="/src/medtable/">View Medicine Details</a>
+            </li>
+            <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                  Customer Management
+              </a>
+              <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                <a class="dropdown-item" href="/src/custform/">Add Customer Details</a>
+                <a class="dropdown-item" href="/src/custtable/">View Customer Details</a>
+            </li>
+            <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                  Order
+              </a>
+              <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                <a class="dropdown-item" href="/src/ordform/">Add Order</a>
+                <a class="dropdown-item" href="/src/ordtable/">View Order</a>
+            </li>
+            <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                Insurance
+              </a>
+              <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                <a class="dropdown-item" href="/src/insform/">Add Insurance Details</a>
+                <a class="dropdown-item" href="/src/instable/">View Insurance Details</a>
+            </li>
+            <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                Cart
+              </a>
+              <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                <a class="dropdown-item" href="/src/cart/">View Cart</a>
+              </div>
+            </li>
+          </ul>
+        </div>
+      </nav>
+  <div class="p-3 text-center bg-light">
+    <h1 class="mb-2">Online  Medical-Shop</h1>
+    <h4 class="mb-2">The only store which is a complete health solution for all your medical needs </h4>
+    {% if user.is_authenticated %}
+    <form class="logout-link" action="{%url 'src:logout'%}" method="post">
+        {% csrf_token %}
+           <button type="submit">logout</button>
+       </form>
+     {% else %}
+    <a class="btn btn-primary" href="{% url 'src:login' %}" role="button">Login</a>
+    <a class="btn btn-primary" href="{% url 'src:signup' %}" role="button">Signup</a>
+    {% endif %}
+  </div>
+  <head>
+    <style>
+    body {
+      background-image: url('../../static/medicineshop/images/b.jpg');
+      background-repeat: no-repeat;
+      background-attachment: fixed;  
+      background-size: cover;
+    }
+    </style>
+    </head>
+    <body>
+  <!-- Jumbotron -->
+    <br>
+  <!--<link rel="icon" href="{% static 'img/RVCE_New_Logo.jpeg' %}" type="image/jpeg" sizes="16x16">
+  <div class="jumbotron" style="background: none;">
+    <div class="row">
+        <div class="col-md-9"><h1 id="h1">Medical Store Management</h1></div>
+    </div>
+</div>
 
   {% block title %}<title>Medical-Shop</title>{% endblock %}
 
@@ -26,10 +114,65 @@
         {% endif %}
     </ul>
 </nav>
-
-
-</head>
-<body>
+</head>-->
+<!--<body>
+  <nav class="navbar navbar-inverse navbar-fixed-top">
+    <div class="container-fluid">
+        <div class="navbar-header">
+            <a href="/src/" class="navbar-brand"><span
+                    class="glyphicon glyphicon glyphicon-home"></span>&nbsp;HOME</a>
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#thisnav">
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+        </div>
+        <div class="collapse navbar-collapse" id="thisnav">
+            <ul class="nav navbar-nav">
+                <li class="dropdown"><a href="#" class="dropdown-toggle" data-toggle="dropdown">Medicine Management<b
+                        class="caret"></b></a>
+                    <ul id="med-menu" class="dropdown-menu inverse-dropdown">
+                        <li><a href="/src/medform/">Add Medicine Details</a></li>
+                        <li><a href="/src/medtable/">View Medicine Details</a></li>
+                    </ul>
+                </li>
+                
+                        <li class="dropdown"><a href="#" class="dropdown-toggle" data-toggle="dropdown">Customer Management<b
+                                class="caret"></b></a>
+                            <ul id="cust-menu" class="dropdown-menu inverse-dropdown">
+                                <li><a href="/src/custform/">Add Customer Details</a></li>
+                                <li><a href="/src/custtable/">View Customer Details</a></li>
+                            </ul>
+                        </li>
+                        
+                
+                        <li class="dropdown"><a href="#" class="dropdown-toggle" data-toggle="dropdown">ORDER<b
+                                class="caret"></b></a>
+                            <ul id="cust-menu" class="dropdown-menu inverse-dropdown">
+                                <li><a href="/src/ordform/">Add Order</a></li>
+                                <li><a href="/src/ordtable/">View Order Details</a></li>
+                            </ul>
+                        </li>
+                        <li class="dropdown"><a href="#" class="dropdown-toggle" data-toggle="dropdown">Insurance<b
+                          class="caret"></b></a>
+                      <ul id="cust-menu" class="dropdown-menu inverse-dropdown">
+                          <li><a href="/src/insform/">Add Insurance</a></li>
+                          <li><a href="/src/instable/">View Insurance Details</a></li>
+                      </ul>
+                  </li>
+                  <li class="dropdown"><a href="#" class="dropdown-toggle" data-toggle="dropdown">CART<b
+                    class="caret"></b></a>
+                <ul id="cust-menu" class="dropdown-menu inverse-dropdown">
+                    <li><a href="/src/cart/">view Cart</a></li>
+                </ul>
+            </li>
+                   
+               
+            </ul>
+        </div>
+    </div>
+</nav>
+</div>-->
 
   {% block content %}
   {% endblock %}

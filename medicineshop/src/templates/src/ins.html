@@ -1,0 +1,169 @@
+
+{% extends 'src/base.html' %}
+{% load static %}
+
+    {% block content %}
+<head>
+    <title>Insurance Details</title>    
+</head>
+<head>
+    <style>
+    body {
+      background-image: url('../../static/medicineshop/images/ins.jpg');
+      background-repeat: no-repeat;
+      background-attachment: fixed;  
+      background-size: cover;
+    }
+    </style>
+    </head>
+
+<div class="container">
+    <div class="col-md-2"></div>
+    <div class="panel panel-default col-md-8 jumcust2">
+        <div class="panel-heading">
+            <h1 class="padtop5">
+                {% if add %}
+                    Add Insurance Details
+                {% else %}
+                    Update Insurance Details
+                {% endif %}</h1>
+        </div>
+        <div class="panel-body">
+            {% if ins %}
+                <form action="/src/insformupdate{{ ins.ins_no }}/" method="post">
+                    {% csrf_token %}
+                    <div class="row padtop15">
+                        <div class="col-md-3 padtop5">
+                            <label for="ins_no" class="form-control-label">Insurance Number:</label>
+                        </div>
+                        <div class="form-group col-md-4">
+                            <input type="text" name="ins_no" class="form-control" id="ins_no" placeholder="Insurance Number"
+                                   value="{{ ins.ins_no }}" required/>
+                        </div>
+                    </div>
+                    <div class="row padtop15">
+                        <div class="col-md-3 padtop5">
+                            <label for="c_id" class="form-control-label">Customer ID:</label>
+                        </div>
+                        <div class="form-group col-md-4">
+                            
+                                <select name="c_id">
+                                    {% for entry in cust %}
+                                    <option value="{{entry.c_id}}">{{entry.c_id}}</option>
+                                    {% endfor %}
+                                </select>
+                        </div>
+                    </div>
+                    
+                    <div class="row padtop5">
+                        <div class="col-md-3 padtop5">
+                            <label for="company" class="form-control-label">Company :</label>
+                        </div>
+                        <div class="form-group col-md-8">
+                            <input type="text" name="company" class="form-control" id="company" placeholder="company"
+                                   value="{{ ins.company }}"/>
+                        </div>
+                    </div>
+                    <div class="row padtop5">
+                        <div class="col-md-3">
+                            <label for="percent" class="form-control-label padtop5">Percent:</label>
+                        </div>
+                        <div class="col-md-2">
+                            <input type="text" name="percent" class="form-control" id="percent" placeholder="percent"
+                                   value="{{ ins.percent }}" required/>
+                        </div>
+                    </div>
+                    <div class="row" id="buttoncustom">
+                        <div class="col-md-3"></div>
+                        <div class="col-md-2 padtop15">
+                            <button type="submit" class="btn btn-default"><a href="/src/">Cancel</a></button>
+                        </div>
+                        {% if user.is_authenticated %}
+                        <div class="col-md-2 padtop15">
+                            <button type="submit" class="btn btn-primary">
+                                {% if add %}
+                                    Add Record
+                                {% else %}
+                                    Update Record
+                                {% endif %}</button>
+                        </div>
+                        <div class="col-md-offset-8 padtop15">
+                            <button type="submit" class="delbut btn btn-danger"><a
+                                    href="/src/insformdelete{{ins.ins_no }}/">Delete Record</a></button>
+                        </div>
+                        {% else %}
+                        <h3>LOGIN TO EDIT</h3>
+                        {% endif %}
+                        
+                    </div>
+                </form>
+            {% else %}
+                <form action="/src/insforminsert/" method="post">
+                    {% csrf_token %}
+                    <div class="row padtop15">
+                        <div class="col-md-3 padtop5">
+                            <label for="ins_no" class="form-control-label">Insurance Number:</label>
+                        </div>
+                        <div class="form-group col-md-4">
+                            <input type="text" name="ins_no" class="form-control" id="ins_no" placeholder="Insurance Number"
+                                   value="{{ ins.ins_no }}" required/>
+                        </div>
+                    </div>
+                    <div class="row padtop15">
+                        <div class="col-md-3 padtop5">
+                            <label for="c_id" class="form-control-label">Customer ID:</label>
+                        </div>
+                        <div class="form-group col-md-4">
+                            
+                                <select name="c_id">
+                                    {% for entry in cust %}
+                                    <option value="{{entry.c_id}}">{{entry.c_id}}</option>
+                                    {% endfor %}
+                                </select>
+                        </div>
+                    </div>
+                    <div class="row padtop5">
+                        <div class="col-md-3 padtop5">
+                            <label for="company" class="form-control-label">Company :</label>
+                        </div>
+                        <div class="form-group col-md-8">
+                            <input type="text" name="company" class="form-control" id="company" placeholder="company"
+                                   value="{{ ins.company }}"/>
+                        </div>
+                    </div>
+                    <div class="row padtop5">
+                        <div class="col-md-3">
+                            <label for="percent" class="form-control-label padtop5">Percent:</label>
+                        </div>
+                        <div class="col-md-2">
+                            <input type="text" name="percent" class="form-control" id="percent" placeholder="percent"
+                                   value="{{ ins.percent }}" required/>
+                        </div>
+                    </div>
+                    <div class="row" id="buttoncustom">
+                        <div class="col-md-3"></div>
+                        <div class="col-md-2 padtop15">
+                            <button type="submit" class="btn btn-default"><a href="/src/">Cancel</a></button>
+                        </div>
+                        {% if user.is_authenticated %}
+                        <div class="col-md-2 padtop15">
+                            <button type="submit" class="btn btn-primary">
+                                {% if add %}
+                                    Add Record
+                                {% else %}
+                                    Update Record
+                                {% endif %}</button>
+                        </div>
+                        {% else %}
+                        <h3>LOGIN TO EDIT</h3>
+                        {% endif %}
+                    </div>
+                </form>
+            {% endif %}
+        </div>
+
+    </div>
+
+</div>
+
+{% endblock %}

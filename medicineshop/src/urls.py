@@ -21,5 +21,31 @@ urlpatterns = [
     url(r'^custformdelete(?P<foo>[0-9]+)/', views.custformdelete, name="custformdelete"),
     url(r'^custtable/', views.custtable, name='custtable'),
 
+    url(r'^medform/', views.medform, name="medform"),
+    url(r'^medforminsert/', views.medforminsert, name="medforminsert"),
+    url(r'^medformupdate(?P<foo>[0-9]+)/', views.medformupdate, name="medformupdate"),
+    url(r'^medformview(?P<foo>[0-9]+)/', views.medformview, name="medformview"),
+    url(r'^medformdelete(?P<foo>[0-9]+)/', views.medformdelete, name="medformdelete"),
+    url(r'^medtable/', views.medtable, name='medtable'),
+
+    url(r'^ordform/', views.ordform, name="ordform"),
+    url(r'^ordforminsert/', views.ordforminsert, name="ordforminsert"),
+    url(r'ordformupdate(?P<foo>[0-9]+)/', views.ordformupdate, name="ordformupdate"),
+    url(r'^ordformview(?P<foo>[0-9]+)/', views.ordformview, name="ordformview"),
+    url(r'^ordformdelete(?P<foo>[0-9]+)/', views.ordformdelete, name="ordformdelete"),
+    url(r'^ordtable/', views.ordtable, name='ordtable'),
+
+    url(r'^insform/', views.insform, name="insform"),
+    url(r'^insforminsert/', views.insforminsert, name="insforminsert"),
+    url(r'^insformupdate(?P<foo>[0-9]+)/', views.insformupdate, name="insformupdate"),
+    url(r'^insformview(?P<foo>[0-9]+)/', views.insformview, name="insformview"),
+    url(r'^insformdelete(?P<foo>[0-9]+)/', views.insformdelete, name="insformdelete"),
+    url(r'^instable/', views.instable, name='instable'),
+
+    url(r'^cart/', views.cart, name="cart"),
+    url(r'^pres/', views.pres, name="pres"),
+    url(r'^check/', views.check, name="check"),
     
+    url(r'^viewpurchase/', views.viewpurchase, name="viewpurchase"),
+
 ]

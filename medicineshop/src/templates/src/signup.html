@@ -2,6 +2,20 @@
 
 {% block content %}
  <h1> Signup</h1>
+ {% load static %}
+ <!--<body style="background-image: url('{% static "medicineshop/src/static/medicineshop/images/hello.jpg"%}')";></body>-->
+ <link rel="stylesheet" src="{% static '../../static/medicineshop/css/base.css' %}">
+ <head>
+    <style>
+    body {
+      background-image: url('../../static/medicineshop/images/signup.jpg');
+      background-repeat: no-repeat;
+      background-attachment: fixed;  
+      background-size: cover;
+    }
+    </style>
+    </head>
+    <body>
 
  <form class="site-form" action="/src/signup/" method= "post">
  {% csrf_token %}

@@ -25,6 +25,7 @@ app_name='med'
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('src/', include('src.urls')),
+    path('feedback/', include('feedback.urls')),
     path('', V.home),
 
 ]

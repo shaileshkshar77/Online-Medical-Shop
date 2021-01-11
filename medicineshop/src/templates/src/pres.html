@@ -1,0 +1,23 @@
+{% extends 'src/base.html' %}
+{% load static %}
+
+    {% block content %}
+<head>
+    
+    <title>PRESCRIPTION</title>
+</head>
+
+    {% if user.is_authenticated %}
+
+<h2>Upload PRESCRIPTION</h2>
+<form action="/src/check/" method="POST" enctype="multipart/form-data"> 
+    {% csrf_token %} 
+    {{ form.as_p }} 
+    <input type="submit" value="Submit"> 
+</form> 
+{% else %}
+<h1> LOGIN TO ACCESS</h1>
+{% endif %}
+
+
+{% endblock %}
