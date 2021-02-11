@@ -7,7 +7,7 @@ class Customer(models.Model):
     lname = models.CharField(max_length=30)
     address = models.CharField(max_length=100)
     email = models.CharField(max_length=50)
-    phn_no = models.BigIntegerField(unique=True)
+    phn_no = models.BigIntegerField(unique=True,max_length=10)
 
     def __str__(self):
         return self.email
@@ -17,7 +17,7 @@ class Insurance(models.Model):
     ins_no = models.IntegerField(unique=True)
     c_id = models.CharField(max_length=30)
     company = models.CharField(max_length=30)
-    percent = models.IntegerField()
+    percent = models.IntegerField(max_length=3)
 
     def __str__(self):
         return self.ins_no
@@ -27,6 +27,7 @@ class orderlist(models.Model):
     c_id = models.CharField(max_length=30)
     m_id=models.CharField(max_length=30)
     quantity = models.IntegerField()
+    month=models.CharField(max_length=30)
     cost=models.IntegerField()
 
     def __str__(self):

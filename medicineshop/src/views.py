@@ -65,6 +65,7 @@ def custforminsert(request):
         cust.save()
     except IntegrityError:
         return render(request, "src/new.html")
+
     return render(request, 'src/index.html')
 
 
@@ -164,6 +165,7 @@ def ordforminsert(request):
         o.o_id = request.POST['o_id']
         o.m_id = request.POST['m_id']
         o.c_id = request.POST['c_id']
+        o.month= request.POST['month']
         o.quantity = request.POST['quantity']
         m=Medicine.objects.get(m_id=o.m_id)
         o.cost=int(m.price)*int(o.quantity)
@@ -179,12 +181,14 @@ def ordformupdate(request, foo):
         o.o_id = request.POST['o_id']
         o.c_id = request.POST['c_id']
         o.m_id = request.POST['m_id']
+        o.month= request.POST['month']
         o.quantity = request.POST['quantity']
         m=Medicine.objects.get(m_id=o.m_id)
         o.cost=int(m.price)*int(o.quantity)
         o.save()
     except IntegrityError:
         return render(request, "src/new.html")
+    
     return render(request, 'src/index.html')
 
 
@@ -268,6 +272,7 @@ def cart(request):
 def viewpurchase(request):
     c = request.POST['c_id']
     o = orderlist.objects.filter(c_id=c)
+    
     i=Insurance.objects.get(c_id=c)
     s=0
     for obj in o:
